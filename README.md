@@ -1,10 +1,11 @@
 ## CloudFoundry WCF Service Hosting Example
 
 This sample assumes you have an existing Windows 2012R2 cell with .NET 4.5.2 registered as the `windows2012R2`
-stack in CloudFoundry.
+stack in CloudFoundry. You will also need a Windows development machine to compile the solution.
 
 1. `git clone https://github.com/sneal/WCFServiceSample`
-2. `cf push wcfsample -s windows2012R2 -b binary_buildpack --health-check-type none -p ./Sneal.Service/Sneal.Service.IIS/`
+2. Build the solution using VisualStudio or MSBuild. I used [VisualStudio 2015 Community Edition](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx).
+3. From the root of the cloned repo where the .sln file is, run: `cf push wcfsample -s windows2012R2 -b binary_buildpack --health-check-type none -p ./Sneal.Service.IIS/`
 
 Take particular note of the handler mapping in the web.config and the associated .svc file in the web project. This
 allows the Hostable Web Core to serve the WCF service in the library project.
